@@ -6,12 +6,31 @@
 // La partita termina quando il giocatore inserisce un numero “vietato” o raggiunge il numero massimo possibile di numeri consentiti.
 // Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha inserito un numero consentito.
 
-var numeriCpu = [];
+var numeriCpu = new Array(16);
+var numeriGiocatore = [];
+console.log(numeriCpu.length);
+var numeriInterni = 0;
+var trovato = false;
 
-for (var i = 0; i < 17; i++) {
-
+while (numeriInterni <= numeriCpu.length) {
   var randomNum = Math.floor(Math.random()*(100-1))+1;
-  numeriCpu.push(randomNum)
+  var i = 0;
+
+  while (i!=numeriCpu.length && trovato == false ) {
+    console.log(1);
+    if (randomNum==numeriCpu[i]) {
+      trovato = true;
+    }
+    i++
+  }
+
+  if (trovato == false) {
+    numeriCpu[numeriInterni]=randomNum;
+  }
+  numeriInterni++;
+  console.log(2);
 
 }
+
+
 console.log(numeriCpu);
