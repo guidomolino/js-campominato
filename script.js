@@ -6,31 +6,70 @@
 // La partita termina quando il giocatore inserisce un numero “vietato” o raggiunge il numero massimo possibile di numeri consentiti.
 // Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha inserito un numero consentito.
 
-var numeriCpu = new Array(16);
-var numeriGiocatore = [];
-console.log(numeriCpu.length);
-var numeriInterni = 0;
-var trovato = false;
+// var numeriCpu = new Array(16);
+// var numeriGiocatore = [];
+// console.log(numeriCpu.length);
+// var numeriInterni = 0;
+// var trovato = false;
+//
+// while (numeriInterni <= numeriCpu.length) {
+//   var randomNum = Math.floor(Math.random()*(100-1))+1;
+//   var i = 0;
+//
+//   while (i!=numeriCpu.length && trovato == false ) {
+//     console.log(1);
+//     if (randomNum==numeriCpu[i]) {
+//       trovato = true;
+//     }
+//     i++
+//   }
+//
+//   if (trovato == false) {
+//     numeriCpu[numeriInterni]=randomNum;
+//   }
+//   numeriInterni++;
+//   console.log(2);
+//
+// }
+//
+//
+// console.log(numeriCpu);
 
-while (numeriInterni <= numeriCpu.length) {
-  var randomNum = Math.floor(Math.random()*(100-1))+1;
+
+var numeriCpu = [];
+var maxNumeri = 16;
+
+
+
+while (numeriCpu.length < maxNumeri) {
+
+  var randomNum = getRandom(1,100);
+  var esiste = numeriCpu.giaPresente(randomNum);
+
+  if (esiste == false) {
+    numeriCpu.push(randomNum);
+  }
+
+}
+
+console.log(numeriCpu);
+
+function giaPresente(array, elemento) {
   var i = 0;
+  var trovato = false;
 
-  while (i!=numeriCpu.length && trovato == false ) {
-    console.log(1);
-    if (randomNum==numeriCpu[i]) {
+  while (i<array.length && trovato == false) {
+    if (array[i] == elemento) {
       trovato = true;
     }
     i++
   }
 
-  if (trovato == false) {
-    numeriCpu[numeriInterni]=randomNum;
-  }
-  numeriInterni++;
-  console.log(2);
-
+  return trovato;
 }
 
-
-console.log(numeriCpu);
+function getRandom(min,max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max-min))+min;
+}
