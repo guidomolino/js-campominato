@@ -16,7 +16,7 @@ while (numeriCpu.length < maxNumeri) {
 
   var randomNum = getRandom(1,100);
   //mi assicuro che i dati non si ripetino tra di loro
-  var esisteCpu = numeriCpu.giaPresente(randomNum);
+  var esisteCpu = giaPresente(numeriCpu, randomNum);
 
   if (esisteCpu == false) {
     numeriCpu.push(randomNum);
@@ -27,24 +27,24 @@ while (numeriCpu.length < maxNumeri) {
 console.log(numeriCpu);
 
 // chiedo all'utente di inserire i numeri
-
 var numeriUtente = [];
 var maxQuantita = 100;
 var minQuantita = 1;
 var quantita = maxQuantita - maxNumeri;
 
 var punteggio = 0;
+var vinto = false;
 
 // il ciclo si ripete fino a quando l'array numeriUtente non raggiunge la quantità massima di numeri rimanenti disponibili
-while (numeriUtente.length < quantita) {
+while (punteggio < quantita || ) {
   var playerNum = prompt("Inserisci un numero compreso tra 1 e 100:");
   // mi assicuro che non ripeta lo stesso numero con nessuno dei precedenti da lui inseriti
-  var esisteUtente = numeriUtente.giaPresente(playerNum);
+  var esisteUtente = giaPresente(numeriUtente, playerNum);
   //controllo che non sia tra i numeri della cpu
-  var esistePlayerCpu = numeriCpu.giaPresente(playerNum);
+  var esistePlayerCpu = giaPresente(numeriCpu, playerNum);
 
 
-  if (esisteUtente == false && esistePlayerCpu == false) {
+  if (esisteUtente == false && esistePlayerCpu == false && vinto = false) {
     numeriUtente.push(playerNum);
     console.log("E' corretto!");
     // incremento il punteggio a ogni ciclo corretto
@@ -52,10 +52,12 @@ while (numeriUtente.length < quantita) {
     console.log("Punti attuali:", punteggio);
   }else {
     console.log("Sbagliato! Hai perso");
+
   }
   // condizione di vittoria
   if (punteggio == quantita) {
     console.log("Hai vinto!");
+    vinto = true;
   }
 
 }
