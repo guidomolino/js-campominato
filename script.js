@@ -34,9 +34,10 @@ var quantita = maxQuantita - maxNumeri;
 
 var punteggio = 0;
 var vinto = false;
+var perso = false;
 
 // il ciclo si ripete fino a quando l'array numeriUtente non raggiunge la quantità massima di numeri rimanenti disponibili
-while (punteggio < quantita || ) {
+while (punteggio < quantita || perso = false) {
   var playerNum = prompt("Inserisci un numero compreso tra 1 e 100:");
   // mi assicuro che non ripeta lo stesso numero con nessuno dei precedenti da lui inseriti
   var esisteUtente = giaPresente(numeriUtente, playerNum);
@@ -52,6 +53,7 @@ while (punteggio < quantita || ) {
     console.log("Punti attuali:", punteggio);
   }else {
     console.log("Sbagliato! Hai perso");
+    perso = true;
 
   }
   // condizione di vittoria
