@@ -6,47 +6,19 @@
 // La partita termina quando il giocatore inserisce un numero “vietato” o raggiunge il numero massimo possibile di numeri consentiti.
 // Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha inserito un numero consentito.
 
-// var numeriCpu = new Array(16);
-// var numeriGiocatore = [];
-// console.log(numeriCpu.length);
-// var numeriInterni = 0;
-// var trovato = false;
-//
-// while (numeriInterni <= numeriCpu.length) {
-//   var randomNum = Math.floor(Math.random()*(100-1))+1;
-//   var i = 0;
-//
-//   while (i!=numeriCpu.length && trovato == false ) {
-//     console.log(1);
-//     if (randomNum==numeriCpu[i]) {
-//       trovato = true;
-//     }
-//     i++
-//   }
-//
-//   if (trovato == false) {
-//     numeriCpu[numeriInterni]=randomNum;
-//   }
-//   numeriInterni++;
-//   console.log(2);
-//
-// }
-//
-//
-// console.log(numeriCpu);
 
+// genero i 16 dati casuali per la cpu
 
 var numeriCpu = [];
 var maxNumeri = 16;
 
-
-
 while (numeriCpu.length < maxNumeri) {
 
   var randomNum = getRandom(1,100);
-  var esiste = numeriCpu.giaPresente(randomNum);
+  //mi assicuro che i dati non si ripetino tra di loro
+  var esisteCpu = numeriCpu.giaPresente(randomNum);
 
-  if (esiste == false) {
+  if (esisteCpu == false) {
     numeriCpu.push(randomNum);
   }
 
@@ -54,6 +26,41 @@ while (numeriCpu.length < maxNumeri) {
 
 console.log(numeriCpu);
 
+// chiedo all'utente di inserire i numeri
+
+var numeriUtente = [];
+var maxQuantita = 100;
+var minQuantita = 1;
+var quantita = maxQuantita - maxNumeri;
+
+var punteggio = 0;
+
+// il ciclo si ripete fino a quando l'array numeriUtente non raggiunge la quantità massima di numeri rimanenti disponibili
+while (numeriUtente.length < quantita) {
+  var playerNum = prompt("Inserisci un numero compreso tra 1 e 100:");
+  // mi assicuro che non ripeta lo stesso numero con nessuno dei precedenti da lui inseriti
+  var esisteUtente = numeriUtente.giaPresente(playerNum);
+  //controllo che non sia tra i numeri della cpu
+  var esistePlayerCpu = numeriCpu.giaPresente(playerNum);
+
+
+  if (esisteUtente == false && esistePlayerCpu == false) {
+    numeriUtente.push(playerNum);
+    console.log("E' corretto!");
+    // incremento il punteggio a ogni ciclo corretto
+    punteggio++;
+    console.log("Punti attuali:", punteggio);
+  }else {
+    console.log("Sbagliato! Hai perso");
+  }
+  // condizione di vittoria
+  if (punteggio == quantita) {
+    console.log("Hai vinto!");
+  }
+
+}
+
+// funzione per trovare i numeri già presenti all'interno dell'array specificato
 function giaPresente(array, elemento) {
   var i = 0;
   var trovato = false;
@@ -68,6 +75,7 @@ function giaPresente(array, elemento) {
   return trovato;
 }
 
+// funzione per generare un numero casuale intero tra i due valori minimo e massimo
 function getRandom(min,max) {
   min = Math.ceil(min);
   max = Math.floor(max);
